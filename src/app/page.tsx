@@ -1,3 +1,4 @@
+import Navigation from "@/components/navigation";
 import EnhancedHero from "@/components/enhanced-hero";
 import HowItWorks from "@/components/how-it-works";
 import WhatsIncluded from "@/components/whats-included";
@@ -10,6 +11,7 @@ import Footer from "@/components/footer";
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <Navigation />
       <EnhancedHero />
       <HowItWorks />
       <WhatsIncluded />
