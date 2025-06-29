@@ -21,6 +21,11 @@ const Navigation: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return null;
+  }
+
   // Miller's Law: 5-7 navigation items
   const navItems = [
     { name: 'How It Works', href: '#how-it-works' },
@@ -100,7 +105,7 @@ const Navigation: React.FC = () => {
             <div className="w-6 h-6 flex flex-col justify-center items-center">
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className="w-6 h-0.5 bg-[#2C2C2C] block transition-all duration-300"
+                className="w-6 h-6 bg-[#2C2C2C] block transition-all duration-300"
               />
               <motion.span
                 animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
