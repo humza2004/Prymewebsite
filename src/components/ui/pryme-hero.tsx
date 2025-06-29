@@ -1,7 +1,13 @@
 "use client"
-import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 import { TextRevealByWord } from "@/components/ui/text-reveal";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
+
+// Dynamically import AnimatedGradientBackground with SSR disabled to prevent hydration mismatch
+const AnimatedGradientBackground = dynamic(
+  () => import("@/components/ui/animated-gradient-background"),
+  { ssr: false }
+);
 
 const PrymeHero = () => {
   return (
@@ -103,7 +109,7 @@ const PrymeHero = () => {
             transition={{ duration: 2, repeat: Infinity }}
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </motion.svg>
+          </svg>
         </motion.div>
       </div>
     </div>
