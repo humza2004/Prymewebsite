@@ -1,8 +1,14 @@
 "use client";
 import { motion } from "framer-motion";
 import React from "react";
+import dynamic from "next/dynamic";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
-import { ThanosSnapEffect } from "@/components/ui/thanos-snap-effect";
+
+// Dynamically import ThanosSnapEffect with SSR disabled to prevent hydration mismatch
+const ThanosSnapEffect = dynamic(
+  () => import("@/components/ui/thanos-snap-effect").then((mod) => ({ default: mod.ThanosSnapEffect })),
+  { ssr: false }
+);
 
 const EnhancedHero: React.FC = () => {
   return (
