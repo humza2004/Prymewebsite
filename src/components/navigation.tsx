@@ -5,6 +5,12 @@ import React, { useState, useEffect } from "react";
 const Navigation: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Ensure component is mounted before applying scroll-dependent styles
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Jakob's Law: Familiar scroll behavior
   useEffect(() => {
@@ -37,7 +43,7 @@ const Navigation: React.FC = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
+        mounted && isScrolled 
           ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
           : 'bg-transparent'
       }`}
@@ -62,7 +68,7 @@ const Navigation: React.FC = () => {
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
                 className={`font-medium transition-colors duration-200 hover:text-[#C4825B] ${
-                  isScrolled ? 'text-[#2C2C2C]' : 'text-[#2C2C2C]'
+                  mounted && isScrolled ? 'text-[#2C2C2C]' : 'text-[#2C2C2C]'
                 }`}
                 whileHover={{ y: -2 }}
                 initial={{ opacity: 0, y: -20 }}
