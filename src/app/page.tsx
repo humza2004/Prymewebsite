@@ -1,19 +1,25 @@
 import Navigation from "@/components/navigation";
-import HeroSection from "@/components/hero-section";
-import TrustSection from "@/components/trust-section";
-import ServicesSection from "@/components/services-section";
-import MembershipSection from "@/components/membership-section";
-import ContactSection from "@/components/contact-section";
+import EnhancedHero from "@/components/enhanced-hero";
+import HowItWorks from "@/components/how-it-works";
+import WhatsIncluded from "@/components/whats-included";
+import HealthTracks from "@/components/health-tracks";
+import MembershipTiers from "@/components/membership-tiers";
+import SocialProof from "@/components/social-proof";
+import CTASection from "@/components/cta-section";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Navigation />
-      <HeroSection />
-      <TrustSection />
-      <ServicesSection />
-      <MembershipSection />
-      <ContactSection />
+      <EnhancedHero />
+      <HowItWorks />
+      <WhatsIncluded />
+      <HealthTracks />
+      <MembershipTiers />
+      <SocialProof />
+      <CTASection />
+      <Footer />
     </main>
   );
 }
