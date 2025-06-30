@@ -2,12 +2,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import dynamic from "next/dynamic";
-
-// Dynamically import AnimatedGradientBackground with SSR disabled to prevent hydration mismatch
-const AnimatedGradientBackground = dynamic(
-  () => import("@/components/ui/animated-gradient-background"),
-  { ssr: false }
-);
+import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 
 // Dynamically import ThanosSnapEffect with SSR disabled to prevent hydration mismatch
 const ThanosSnapEffect = dynamic(
