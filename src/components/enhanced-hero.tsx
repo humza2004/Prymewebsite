@@ -1,6 +1,6 @@
 "use client";
-import { motion } from "framer-motion";
-import React from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useRef } from "react";
 import dynamic from "next/dynamic";
 import AnimatedGradientBackground from "@/components/ui/animated-gradient-background";
 
@@ -11,8 +11,21 @@ const ThanosSnapEffect = dynamic(
 );
 
 const EnhancedHero: React.FC = () => {
+  const heroRef = useRef<HTMLDivElement>(null);
+  
+  // Track scroll progress relative to the hero section
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+
+  // Transform values for parallax effect
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-[#F8F5F0]">
+    <div ref={heroRef} className="relative w-full h-screen overflow-hidden bg-[#F8F5F0]">
       {/* Animated Gradient Background with Pryme Health Colors */}
       <AnimatedGradientBackground 
         startingGap={120}
@@ -33,8 +46,11 @@ const EnhancedHero: React.FC = () => {
         containerClassName="opacity-80"
       />
 
-      {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center max-w-6xl mx-auto">
+      {/* Hero Content with Parallax Effect */}
+      <motion.div 
+        className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center max-w-6xl mx-auto"
+        style={{ opacity, y, scale }}
+      >
         {/* Highlight Badge - Von Restorff Effect */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -134,7 +150,7 @@ const EnhancedHero: React.FC = () => {
             <span>Licensed Physicians</span>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 };
